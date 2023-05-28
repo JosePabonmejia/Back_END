@@ -1,0 +1,7 @@
+%composer init 
+Primero nos mostrara Package name (<vendor>/<name>) [pabon/6-como_iniciar]:[ENTER]
+Nos pedira Description []:ejemplo composer
+Author [JosePabonmejia <josefolofus@gmail.com>, n to skip]: Author
+Minimum Stability []: estabilidad minima dev alpha veta diferentes etapas del proyecto
+Package Type (e.g. library, project, metapackage, composer-plugin) []: tu proyecto que es? 
+License []:MIT

@@ -1,0 +1,9 @@
+{
+    "name":"trabajo",
+    "description":"instituto online",
+    "courses":{
+       "advanced": ["PHP","VUEjs"],
+        "basic":["JSON","HTML"]
+    },
+    "example":"text"
+}

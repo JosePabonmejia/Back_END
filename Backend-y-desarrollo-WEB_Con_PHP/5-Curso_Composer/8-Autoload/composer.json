@@ -1,0 +1,27 @@
+{ 
+    "autoload":{ 
+        "files": [ 
+           
+            "src/files1.php",
+            "src/files2.php"
+        ],
+                
+        "classmap": [
+            
+            "database/seeds",
+            "database/factories"
+        ],
+             
+        "psr-4": {
+            "Text\\":"src/"
+        }
+    } 
+}
+
+SISTEMA DE AUTOLOAD
+primero cargamos archivos con HELPERS
+con files nosotros configuramos archivos de ayuda, archivos con funciones
+SWEGUNDO cargamos carpetas con las clases
+con classmap nosotros cargamos de una manera directa carpetas que van a tener diferentes clases
+TERCERO tememos la configuracion de nuestro proyecto con psr4
+AL FINALIZAR DEBEMOS IR A LA LINEA DE COMANDO A HACCER UN (composer dump)

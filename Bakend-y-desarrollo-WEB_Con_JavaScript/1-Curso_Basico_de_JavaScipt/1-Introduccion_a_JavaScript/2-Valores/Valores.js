@@ -70,3 +70,15 @@ typeof console.log  // 'function'
 typeof {tipo: "objeto"} // 'object'
 typeof [1,2,3,4]  // 'object'
 
+
+let productos=Array(
+    {'Nombre':'Late','Precio':12,'Categoria':'Cafes'},
+    {'Nombre':'Maqui','Precio':18,'Categoria':'Cafes'}
+);
+console.log(productos);
+
+    
+
+
+
+

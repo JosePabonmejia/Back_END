@@ -1,0 +1,68 @@
+1- Descargamos la configuracion inicial del proy con el comando : composer require --dev phpunit/phpunit
+2- Se descargan la carpeta vendor y los archivos composer.json y .view e introducimos los datos en composer.json
+{//Originalmente la variable es "name" y si no funciona colocamos vendor
+    "vendor-name/project-name":"JosePabon/post", //Nombre del proveedor osea mua y nombre del proyecto osea Metodo post
+    "description": "Proyecto orientado a objetos",//descripcion
+    "autoload": {//fuincion autoload 
+        "psr-4": {//formato 
+            "App\\":"scr/"//laravel y la carpeta que queremos autocargar osea la del proyecto 
+        }
+    },  
+    "require-dev": {//Viene por defecto
+        "phpunit/phpunit": "^9.6"
+    }
+}
+
+3- Colocamos el code:(composer dump o instal )para que todas nuestra configuracion anterior se cargue  
+4- Hacemos la confuguracion de php unit: Para ello creamos el archivo phpunit con extencion .xml 
+
+<?xml version="1.0" encodig="UTF-8"?>
+<phpunit bootstrap="vendor/autoload.php" colors="true">
+//Le decimos que se levante el servicio de carga y que nos muestre un color por terminal si todo esta bien 
+</phpunit>
+
+5- colocamos valores
+
+<?xml version="1.0" encodig="UTF-8"?>
+<phpunit bootstrap="vendor/autoload.php" colors="true">
+    <testsuite name"Test directory">//Le indicamos que este sera el directorio de pruevas
+    <directory>Tests</directory>//Indicamos el nombre del directorio
+    </testsuite>
+</phpunit>
+
+6- Creamos una carpeta de para las pruevas tests dentro de este creamos la clase PostTest.php 
+<?php
+
+use PHPUnit\Freamework\TestCase;//utiliza php unit hehe 
+use App\Post;
+use App\Comment;
+//creamos la clase testeando el metodo post que creamos 
+class PostTest extends TestCase
+{
+    public function test_add_comment_to_post()//Agregar comentarios 
+    {
+        $post = new Post();
+        $comment = new Comment();//IMportante necesitamos crear un metodo Comment para continuar
+        $post->addComment($comment);//Del post necesitamos crear un comentario 
+        $this->assertEquals(1,$post->countComments());
+        $this->assertInstancedOf(Comment::class,$post->getComments()[0]);
+    }
+}
+
+7- Creamos otra carpeta para "src" para alojar al metodo Post.php
+
+<?php 
+    namespace App;
+    class Post{
+
+    }
+?>
+8- otro para el metodo Comment
+php
+
+<?php 
+    namespace App;
+    class Comment{
+
+    }
+?>

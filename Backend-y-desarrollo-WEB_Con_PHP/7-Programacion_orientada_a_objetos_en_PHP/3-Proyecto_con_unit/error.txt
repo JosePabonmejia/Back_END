@@ -1,0 +1,14 @@
+Could not load "C:\wamp64\www\Curso_PHP\7-Programacion_orientada_a_objetos_en_PHP\3-Proyecto_con_unit\phpunit.xml".
+
+parsing XML declaration: '?>' expected
+
+Specification mandates value for attribute name
+
+attributes construct error
+
+Couldn't find end of Start Tag testsuite line 3
+
+Opening and ending tag mismatch: phpunit line 0 and testsuite
+
+Extra content at the end of the document
+

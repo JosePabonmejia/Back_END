@@ -1,0 +1,596 @@
+¿Qué es la Poo?
+
+La Poo es una paradigma que nos permite mapear objetos reales al mundo digital. 🚀
+
+🤔¿Qué es una clase?
+
+Una clase es una un “Molde” para crear objetos, la cual esta compuesta por atributos y métodos. 😯
+
+🔳¿Qué es un objeto?
+
+Son entidades que tienen un determinado estado, comportamiento e identidad.😎
+Es el resultado de la instancia de una clase.
+
+😧¿A que se refieren con instancia?
+
+Se refiere a la actividad de crear un objeto mediante la lectura, recuperación de los atributos de una clase.🤩
+
+Introducción a clases y objetos
+La clase es el molde con el cual crearemos nuestros objetos. 
+Para crear una clase y después un objeto lo hacemos así:
+
+<?php
+
+class User {
+    public $type;
+}
+
+class Admin {
+    public function greet() {
+        return "Hola admin";
+    }
+}
+
+$user = new User;
+$user->type = new Admin;
+echo $user->type->greet();
+
+
+Y después partirlos en módulos:
+
+index.php
+<?php
+
+require_once './person.php';
+require_once './user.php';
+require_once './admin.php';
+
+$usuario = new User;
+$usuario->type = new Admin;
+echo $usuario->type->greet();
+
+person.php
+<?php
+
+class Person {
+    public function greet() {
+        return "Hola $this->name";
+    }
+}
+
+user.php
+<?php
+
+class User {
+    public $type;
+}
+
+admin.php
+<?php
+
+class Admin extends Person {
+    public $name = 'Administrador';
+}
+
+Una definición más sencilla es: “Abstracción es simplemente crear una plantilla de la clase que queremos crear” es eso, una plantilla, porque al implementarla nos vemos obligados a respetar esa plantilla.
+
+Un caso práctico para los métodos abstractos es cuando quieres tener una clase que va a ser heredada por otras dos clases, y esas dos clases van a tener una función con nombre similar, pero que van a realizar acciones completamente distintas, por ende, no puedes definir las instrucciones en la clase padre, pero necesitas definir algo, en ese caso usas un método abstracto, es decir, una plantilla del método que posteriormente será definido en las clases hijas.
+
+Se que es complicado de entender, pero realizando prácticas y echándole cabeza se logra comprender 😄!
+
+//Public
+: Es una propiedad publica, a la cual puedo acceder desde cualquier parte de mi código y puedo modificarla sin problemas:
+
+<?php
+
+class User {
+
+    public $name;
+    
+}
+
+$pablito = new User;
+$pablito->name = "Pablito";
+
+?>
+Esto es posible porque $name es una propiedad publica, por tanto, puedo acceder desde fuera de la clase, la clase abarca desde la llave de apertura hasta la llave de cierre de la clase.
+
+//Protected
+: Esta propiedad es exclusiva de PHP, basicamente, hace que esta propiedad NO pueda ser accedida desde fuera de mi clase, pero SI puede ser accedida desde cualquier otra clase que herede a mi clase, ¿Qué es herencia? No te preocupes, ya casi llegamos a ese tema, pero que el nombre te vaya dando una idea, por tanto, este ejemplo:
+
+<?php
+
+class User {
+
+protected $name;
+}
+
+$pablito = new User;
+$pablito->name = “Pablito”;
+
+?>
+Mandaría un error, pues $name es protected y no puedo llamarla desde fuera de la clase, pero este otro ejemplo:
+
+<?php
+
+class User {
+
+    protected $name;
+    
+}
+
+class Pablito extends User{
+
+    public function poner_nombre($nombre){
+        $this->name = $nombre;
+    }
+
+}
+
+
+$pablito = new Pablito;
+$pablito->poner_nombre("Pablito");
+
+?>
+Si funcionaría, pues las clases que heredan de mi clase SI pueden acceder.
+
+//Private: 
+Este nos indica que nada, absolutamente nada que NO esté dentro de mi clase va a poder acceder a esa propiedad o método, ni aunque la heredes, esa propiedad va a estar disponible única y estrictamente dentro de mi clase, por lo que el ejemplo anterior daría error (Si hubiésemos puesto private $name), pero el siguiente ejemplo funcionaría a la perfección:
+
+<?php
+
+class User {
+
+    private $name;
+
+    public function poner_nombre($nombre) {
+        $this->name = $nombre;
+    }
+    
+}
+
+$pablito = new User;
+$pablito->poner_nombre("Pablito");
+
+?>
+
+//Modularidad
+Esta no es una técnica de programación, pero si es algo con lo que debemos cumplir para que a futuro se más fácil la mantenibilidad. Este concepto aplica views, models, controllers, helpers, etc.
+
+⚠ Debemos pensar en módulos, no en un solo archivo con todo el código.
+
+Este hace referencia a tener pequeños archivos que al unirlos forman el sistema en si.
+
+La modularidad es la base del buen código, es de lo que venimos hablando siempre, divide todo, se lo más específico posible y siempre tendrás un código mejor organizado, mantenible y fácil de entender.
+
+//Polimorfismo
+El polimorfismo solamente significa varias formas. Esto quiere decir que si un mismo elemento si se comporta de diferentes maneras y otorga diferentes resultados quiere decir que aplica el término de polimorfismo.
+
+<?php
+
+abstract class Base {
+    protected $name;
+
+    private function getClassName() {
+        return get_called_class();
+    }
+
+    public function login() {
+        return "<p>Mi nombre es $this->name desde la clase {$this->getClassName()} <br><p>";
+    }
+}
+
+class Admin extends Base {
+    public function __construct($name) {
+        $this->name = $name;
+    }
+}
+
+class User extends Base {
+    public function __construct($name) {
+        $this->name = $name;
+    }
+}
+
+class Guest extends Base {
+    protected $name = 'invitado';
+}
+
+$guest = new Guest();
+echo $guest->login();
+
+$admin = new Admin('Helena');
+echo $admin->login();
+
+$user = new User('John Moore');
+echo $user->login();
+
+Para abrir el servidor de php utilizamos el comando
+
+php -S localhost:8000
+Y también podemos ejecutar el archivo utilizando el comando:
+
+php *archivo*.php
+
+Polimorfismo: interfaz
+En programación avanzada siempre vamos a trabajar sobre interfaces. Vamos a trabajar con estas porque es lo que enviamos, o sea, que lo enviamos a nivel de configuración.
+
+Nos vamos a encargar de preparar todo el código necesario, así no trabajamos sobre _usuarios _sino sobre la interfaz de usuarios.
+
+index.php
+
+<?php
+
+require_once "./user.php";
+require_once "./post.php";
+
+$user = new User();
+echo $user->all();
+
+$post = new Post();
+echo $post->all();
+search_interface.php
+<?php
+
+interface Search {
+    public function all();
+}
+user.php
+<?php
+
+require_once "./search_interface.php";
+
+class User implements Search {
+    public function all() {
+        return "Obteniendo a los Usuarios";
+    }
+}
+post.php
+<?php
+
+require_once "./search_interface.php";
+
+class Post implements Search {
+    public function all() {
+        return "Obteniendo a los Post";
+    }
+}
+//POLIMORFISMO 
+Polimorfismo: interfaz
+En programación avanzada siempre vamos a trabajar sobre interfaces. Vamos a trabajar con estas porque es lo que enviamos, o sea, que lo enviamos a nivel de configuración.
+
+Nos vamos a encargar de preparar todo el código necesario, así no trabajamos sobre _usuarios _sino sobre la interfaz de usuarios.
+Una interfaz se puede usar para crear diferentes métodos que se comporten de maneras distintas, pero esta sirve como plantilla, y sin querer queriendo ya estamos trabajando usando polimorfismo.
+
+El concepto de Herencia no hace que se puede “heredar por heredar”, o “porque algunos métodos me sirve y reutilizo”, tiene que tener un sentido, tiene que ser de la familia", debe cumplir como ES-UN", como por ejemplo:
+Gato es un Animal? Si
+Caballo es un Animal? Si
+Auto en un Vehículo? Si
+Tren es un vehículo? Si
+Caballo es un vehículo? Hemm, si, a tracción a sangre. Es una Animal pero también puede ser un Vehículo, comparte solamente comportamiento para trasladar.
+
+Ahora imaginemos que tenemos a una persona que le debemos pasar un vehículo para que pueda viajar.
+Si tenemos a Auto y a Tren que heredan de Vehículo, podemos pasarle a Persona el objeto Vehículo, sea auto o tren o los que hereden (porque también sería como un contrato)
+
+classPersona{
+    publicfunctionviajar(Vehiculo $vehiculo){
+        return $vehiculo->transportar();
+    }
+}
+
+classVehiculo{
+    public $nombre;
+
+    publicfunctiontransportar(){
+        return"Voy en " . $this->nombre;
+    }
+}
+
+classAutomovilextendsVehiculo{
+    public $nombre = "Auto";    
+}
+
+classTrenextendsVehiculo{
+    public $nombre = "Tren";    
+}
+
+$auto = new Automovil();
+$tren = new Tren();
+
+$pasajero = new Persona();
+echo $pasajero->viajar($auto);
+
+Pero también podemos pasarle un Caballo, pero supongamos que Caballo y Gato ya heredan de Animal y PHP no acepta herencia múltiple (tampoco tendría sentido herencia entre tipos de vehiculos y animales).
+
+Entonces puedo crear una Interface Transporte para que los Vehiculos implementen un método transportar()
+
+InterfaceTransporte{
+    publicfunctiontransportar();
+}
+La clase Persona me quedaría con un método que acepte ese contrato Transporte
+
+class Persona {
+    public function viajar(Transporte $vehiculo) {
+        return $vehiculo->transportar();
+    }
+}
+A la supercale Vehiculo le implemento la interface Transporte y por lo tanto las subclases también van a ser de tipo Transporte y van a cumplir el contrato. (si tenemos vehículos que en el sistema no sirvan como transporte (como en el caso de los animales) pordemos implementar la interface solamente en las clases específicas, pero en este caso todo los vehículo quiero que sean Transporte)
+
+classVehiculoimplementsTransporte{
+    public $nombre;
+
+    publicfunctiontransportar(){
+        return"Voy en " . $this->nombre;
+    }
+}
+La clase Caballo implementa la interface Transporte y ya cumple el contrato para poder pasarlo a la persona que quiere este tipo de Transporte, pero solamente Caballo, continúa siendo de Tipo Animal como también lo es Gato, pero gato no es Trasporte porque no implementa la interface Transporte
+
+classAnimal{
+    public $nombre;
+}
+
+classGatoextendsAnimal{
+    public $nombre = "Gato";
+}
+
+classCaballoextendsAnimalimplementsTransporte{
+    public $nombre = "Caballo"; 
+
+    public function transportar() {
+        return"Voy en " . $this->nombre;
+    }
+}
+Ahora podemos pasarle a Persona cualquier objeto de Vehículo y Caballo, porque pide que cumpla el contrato de Transporte
+
+$caballo = new Caballo();
+
+$pasajero = new Persona();
+echo $pasajero->viajar($caballo);
+
+una interfaz es simplemente un contrato, es algo que te asegura que, cualquier clase que implemente esa interfaz sí o sí van a tener los métodos que esa interfaz expone.
+
+A la interfaz no le importa cómo se comporte el método, a la interfaz le importa que cualquier clase que la use, sí o sí tenga ese método.
+
+¿Esto para qué sirve? Bueno, imaginamos que ahora tienes una clase B, y la clase B tiene un método que recibe por parámetro una instancia de cualquier clase. Esto se llama inyección de dependencias y es parte de los principios SOLID y se usa mucho en PHP.
+
+Entonces, como tú esperas que se te pase por parámetro la instancia de una clase, tú puedes simplemente usar esa instancia y acceder a sus métodos:
+
+classPersona{
+	publicfunctionsaludar(){
+		echo"Hola :D";
+	}
+}
+
+classSaludo{
+	publicfunctionhacerSaludo($instancia){
+		$instancia->saludar();
+	}
+}
+
+$saludo = new Saludo();
+$persona = new Persona();
+
+$saludo->hacerSaludo($persona);
+De esta forma, la clase Saludo tiene un método que recibe una instancia de cualquier otra clase, y este método, sin saber si existe o si no existe el método saludar en esa instancia que se le pasó, lo manda a llamar, y si no existe entonces va a provocar un error.
+
+Aquí es donde las interfaces entran en juego, puedes usar una interfaz para esperar que cualquier clase que se te pase por ahí tenga sí o sí el método que tú quieres, sabes que la interfaz te va a garantizar que ese método sí va a existir cuando se te pase una instancia y que no se te pueda pasar ninguna instancia que no implemente a dicha interfaz:
+
+interfacetienesQueSaludar{
+	publicfunctionsaludar();
+}
+
+classPersonaimplementstienesQueSaludar{
+	
+	/* Ahora está obligado a implementarlo */
+	publicfunctionsaludar(){
+		echo"Hola :D";
+	}
+
+}
+
+classSaludo{
+
+	/* Aquí le digo que si la clase no implementa a la interfaz, entonces no puede pasar, así me aseguro que sí o sí puedo usar el método saludar, porque sé que esa interfaz me lo asegura */
+	publicfunctionhacerSaludo(tienesQueSaludar $instancia){
+		$instancia->saludar();
+	}
+
+}
+
+$saludo = new Saludo();
+$persona = new Persona();
+
+$saludo->hacerSaludo($persona);
+Para eso sirven las interfaces, te digo, todo esto hace referencia a los principios SOLID, en este caso se hace especial referencia al principio de inyección de dependencias
+
+Herencia
+La herencia nos permitirá crear nuevas clases a partir de otras. O sea, vamos reutilizar código. Quiere decir, que vamos a hacer una abstracción para generar una súper clases general que después utilicemos para crear otras clases.
+
+En la herencia también tendremos una jerarquía de padre e hijo.
+En OOP, la clase padre siempre la encontraremos como la ‘Súperclase’ y los hijos como ‘subclase’.
+Y a través de encapsulamiento vamos a poder definir que puede heredar el hijo y que no.
+
+El método constructor nos permite inicializar las variables del objeto.
+
+<?php
+
+class User {
+    public $name;
+
+    public function __construct($name) {
+        $this->name = $name;
+    }
+}
+Y para crear una herencia utilizamos la palabra reservada extends seguido del nombre de la clases.
+
+<?php
+
+class Admin extends User {
+    // ...
+}
+Para evitar que se incumpla los principios SOLID 2 y 3, podemos utilizar la palabra reservada final al principio del método. También, podemos utilizar este la palabra reservado final en una clase, pero esto significa que no puede ser heredada.
+
+<?php
+
+class User {
+    public $name;
+
+    final public function __construct($name) {
+        $this->name = $name;
+    }
+}
+
+//Interfaces (clases)
+una interface es un elemento de “Análisis Orientado a Objetros (por cierto, debería haber un curso de esto antes de POO para entender bien este mundo)” donde lo que se busca es romper dependencias estrictas de un objeto X con un objeto Y y ser más flexibles. Esto lo van a ver mucho cuando empiecen a trabajar en proyectos complejos. Voy a tratar de hacer un ejemplo:
+
+Supongamos que tienes una empresa de transporte y tienes una flota de taxis y personas que solicitan el servicio:
+
+<?php
+
+class Taxi
+{
+    public $matricula;
+
+    public function __construct($matricula)
+    {
+        $this->matricula = $matricula;
+    }
+    
+    public function viajar($inicio, $destino)
+    {
+        return "Se ha trasladado desde $inicio hasta $destino";
+    }
+
+}
+
+
+class Person 
+{
+    public $name;
+
+    public function __construct($name)
+    {
+        $this->name = $name;
+    }
+
+    public function solicitarTraslado(Taxi $taxi, $lugarInicio, $lugarDestino)    
+    {
+        echo "$this->name ha solicitado servicio de traslado del vehículo $taxi->matricula</br>";
+        echo $taxi->viajar($lugarInicio, $lugarDestino);
+    }
+}
+
+$taxi = new Taxi("ABC123");
+$persona = new Person("José");
+$persona->solicitarTraslado($taxi,"Av Fuerzas Armadas", "Av Baralt");
+Ahora imaginen que te fue muy bien en tu negocio y no solo tienes taxis, ahora tienes aviones, trenes, barcos (Wao!!! adoptame!! jejeje)… Bueno deben modificar su sistema porque ahora el cliente puede solicitar un traslado en cualquier tipo de transporte que tengamos. Si ven, aquí tenemos una dependencia estricta de dos objetos:
+
+class Person 
+{
+    public $name;
+
+    public function__construct($name)
+    {
+        $this->name= $name;
+    }
+
+    public function solicitarTransporte(Taxi $taxi (AQUÍ!!!!),
+ $lugarInicio, $lugarDestino)    
+    {
+        echo "$this->name he solicitado servicio de traslado del vehículo $taxi->matricula</br>";
+        echo $taxi->viajar($lugarInicio, $lugarDestino);
+    }
+}
+La persona solo puede solicitar traslado en taxi y queremos que pueda solicitar traslado en lo que tengamos. Aquí es donde entra la INTERFACE
+
+Quiero que cualquier persona pueda trasladarse en los tipos de vehículos disponibles (taxi, barco y tren. Próximamente en unidades de spaceX jajajajaja). Deberíamos hacer esta implementación:
+
+interface Transporte
+{
+    public function viajar($inicio, $destino);
+}
+
+
+class Taxi implements Transporte
+{
+    public $matricula;
+
+    public $type = 'Taxi';
+
+    public function __construct($matricula)
+    {
+        $this->matricula = $matricula;
+    }
+    
+    public function viajar($inicio, $destino)
+    {
+        return "Se ha trasladado en el $this->type desde $inicio hasta $destino";
+    }
+}
+
+class Barco implements Transporte
+{
+    public $matricula;
+
+    public $type = 'Barco';
+
+    public function __construct($matricula)
+    {
+        $this->matricula = $matricula;
+    }
+    
+    public function viajar($inicio, $destino)
+    {
+        return "Se ha trasladado $this->type desde $inicio hasta $destino";
+    }
+}
+
+
+class Tren implements Transporte
+{
+    public $matricula;
+
+    public $type = 'Tren';
+
+    public function __construct($matricula)
+    {
+        $this->matricula = $matricula;
+    }
+    
+    public function viajar($inicio, $destino)
+    {
+        return "Se ha trasladado $this->type desde $inicio hasta $destino";
+    }
+}
+
+
+class Person 
+{
+    public $name;
+
+    public function __construct($name)
+    {
+        $this->name= $name;
+    }
+
+    public function solicitarTraslado(Transporte $transporte, $lugarInicio, $lugarDestino)    
+    {
+        echo "$this->name he solicitado servicio de traslado del vehículo $transporte->matricula</br>";
+        echo $transporte->viajar($lugarInicio, $lugarDestino).'<hr>';
+    }
+}
+
+$taxi = new Taxi("ABC123");
+$persona = new Person("José");
+$persona->solicitarTraslado($taxi,"Av Fuerzas Armadas", "Av Baralt");
+
+$barco = new Barco("DEF456");
+$persona = new Person("María");
+$persona->solicitarTraslado($barco,"Av Fuerzas Armadas", "Av Baralt");
+
+$tren = new Tren("XXX654");
+$persona = new Person("Pablo");
+$persona->solicitarTraslado($tren,"Av Fuerzas Armadas", "Av Baralt");
+Si ven ahora lo que se le pasa a la clase Person es un objeto de tipo Transporte. Así rompemos la dependencia estricta de mi sistema que solo podía ofrecer traslados en taxi. Ahora a facturar más!!!
+
+Espero este ejemplo haya aclarado el uso de las interfaces.

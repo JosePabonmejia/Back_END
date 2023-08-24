@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVENTOS</title>
+</head>
+<body>
+    <hr>
+    <h1>Poco profecinal</h1>
+    <p>Para mostrar eventos directamente desde el html</p>
+    <hr>
+    <label for="calculo1">Para crear eventos podemos escribir codigo js directamente en html ej: Evento "cuando cambia" onchange="console.log('calbio el input')"</label><br>
+    <input type="text"  placeholder=""><br><br>
+    <label for="calculo2">Si cambias el contenido este input mostrara un mensaje por consola</label>
+    <input type="text"  placeholder="Numero..." onchange="console.log('calbio el input')">
+    <hr>
+    <label for="btncalcular">ej: onclick="console.log('click del boton')"</label><br>
+    <button id="btncalcular" onclick="console.log('click del boton')">Calcular</button>
+    <hr>
+    <h2>Profecional vamos a sumar estos dos inputs</h2>
+    <hr>
+    
+    <p>Por lo general para estos casos nosotros tenemos que conectarnos con el archivo JS y crear una funcion para realizar el EVENTO</p>
+    <label for="calculo1">Primer valor</label>
+    <input type="text" id="calculo1" placeholder="Numero..."><br><br>
+    <label for="calculo2">Segundo valor</label>
+    <input type="text" id="calculo2" placeholder="Numero...">
+    <hr>
+    <p>Aqui solamente llamamos al evento onclick="btnOnClick()"</p>
+    <label for="btncalcular1">Btn con onclick</label>
+    <button id="btncalcular1" onclick="btnOnClick()">Calcular</button>
+    <label for="btncalcular2">Btn con addevent</label>
+    <button id="btncalcular2" >Calcular</button>
+    <br>
+    <span id="resultado">Resultado</span>
+    <script src="./eventos.js"></script>
+</body>
+
+</html>

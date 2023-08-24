@@ -125,3 +125,16 @@ Tipos de entidades
 Existen varios tipos de notaciones para los modelos entidad relacionamiento. Chen es uno de los más utilizados para diagramar lógicamente la base de datos. Aquí te mostramos un ejemplo.
 
 <img src="./asetts/ejemplo-notacion-chen-entidades-98a3fc2d-c6c0-4012-9e0e-c51edc2acc40.webp" alt="">
+
+## Relaciones
+
+Las relaciones nos permiten ligar o unir nuestras diferentes entidades y se representan con rombos. Por convención se definen a través de verbos.<br>
+
+Las relaciones tienen una propiedad llamada cardinalidad y tiene que ver con números. Cuántos de un lado pertenecen a cuántos del otro lado:<br>
+
+* Cardinalidad: 1 a 1
+* Cardinalidad: 0 a 1
+* Cardinalidad: 1 a N
+* Cardinalidad: 0 a N
+
+    <img src="./asetts/cardinalidd-64af23a5-0433-4e2f-b4fd-f56ff86b8824.webp" alt="">

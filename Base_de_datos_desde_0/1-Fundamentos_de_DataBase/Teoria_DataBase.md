@@ -92,3 +92,5 @@ En 1990 Codd se preocupó porque los sistemas de gestión de bases de datos (SGB
 
 * ***Regla 12:*** La regla de la no subversión.
     * a) La base de datos no permitirá que exista un lenguaje o forma de acceso, que permita saltarse las reglas anteriores
+
+<img src="./asetts/ejemplo de entidad-c0b48b06-ba54-4026-add0-e7e522d6f47e.webp" alt="">

@@ -164,3 +164,7 @@ Tipos de dato:<br>
 * INDEX: Se crea por columna para permitir búsquedas más rápidas
 
 
+    <img src="./asetts/Tipos de dato-a19128d2-687f-4655-9a65-ea5deb252697.webp" alt="">
+
+
+

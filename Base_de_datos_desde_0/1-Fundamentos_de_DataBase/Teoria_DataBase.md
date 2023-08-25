@@ -155,6 +155,8 @@ Tipos de dato:<br>
 * Lógicos: BOOLEAN
 * Constraints (Restricciones)
 
+    <img src="./asetts/Tipos de dato-a19128d2-687f-4655-9a65-ea5deb252697.webp" alt="">
+
 * NOT NULL: Se asegura que la columna no tenga valores nulos
 * UNIQUE: Se asegura que cada valor en la columna no se repita
 * PRIMARY KEY: Es una combinación de NOT NULL y UNIQUE
@@ -163,8 +165,105 @@ Tipos de dato:<br>
 * DEFAULT: Coloca un valor por defecto cuando no hay un valor especificado
 * INDEX: Se crea por columna para permitir búsquedas más rápidas
 
+    <img src="./asetts/Captura de pantalla (28)-4e756f67-0052-447f-9dcd-cb9bded3b935.webp" alt="">
 
-    <img src="./asetts/Tipos de dato-a19128d2-687f-4655-9a65-ea5deb252697.webp" alt="">
+
+## Normalizacion 
+
+La normalización como su nombre lo indica nos ayuda a dejar todo de una forma normal. Esto obedece a las 12 reglas de Codd y nos permiten separar componentes en la base de datos:<br>
+
+* Primera forma normal (1FN): Atributos atómicos (Sin campos repetidos)
+* Segunda forma normal (2FN): Cumple 1FN y cada campo de la tabla debe depender de una clave única.
+* Tercera forma normal (3FN): Cumple 1FN y 2FN y los campos que NO son clave, NO deben tener dependencias.
+* xCuarta forma normal (4FN): Cumple 1FN, 2FN, 3FN y los campos multivaluados se identifican por una clave única.
+
+
+### 1FN Primera forma normal: 
+Atributos atómicos (Sin campos repetidos). Esto quiere decir que ningún campo puede tener el mismo tipo de valor como varios campos materia (materia1, materia2,…).
+
+### 2FN Segunda forma normal: 
+Cumplir con 1FN y Cada campo de la tabla debe depender de una clave única. Es decir en las tablas no se puede repetir los campos primarios ya que los mismos son únicos por tanto si existe una relación uno a muchos se debe crear una tabla aparte donde cohabitaran la llave primaria de la primera tabla y la llave primaria de la segunda tabla de esta forma logramos relacionar de manera efectiva dos tablas respetando las llaves primarias.
+
+### 3FN Tercera forma normal: 
+Cumple 1FN y 2FN y los campos que NO son clave NO deben tener dependencias. Esto nos indica que todos los campos de la tabla deben estar estrechamente relacionados con el campo primario y no serlo de manera transitiva, por ejemplo, en una tabla torneos tenemos el código del torneo el nombre el ganador y la fecha de nacimiento del ganador, como observamos no podemos tener la fecha de nacimiento del ganador en dicha tabla ya que no está relacionada para nada con el torneo y además existe la posibilidad que en varios registros el mismo ganador tenga diferentes fechas de nacimiento por lo cual no mantendría la consistencia de los datos.
+
+### 4FN Cuarta forma normal:
+Cumplir 1FN 2FN y 3FN. Los campos multivaluados se identifican por una clave única. Cuando relacionamos dos tablas totalmente independientes cada una de la otra debemos relacionarlas a través de una tabla aparte de las mismas donde solo colocaremos las llaves primarias de cada tabla ya que colocar cualquier otra información relacionada con las tablas implicaría repetir datos, además de hacer la tarea de actualización de registros primarias más compleja, ya que por ejemplo si deseo actualizar el nombre del curso no solo lo tendría que hacer en la tabla cursos sino también en cada tabla donde coloque el nombre lo cual no garantiza la integridad de la información, adiciona información innecesaria en los registros y hace más complejo el trabajo de administrar los datos.
+
+## Formas normales en Bases de Datos relacionales (Implementacion)
+
+La normalización en las bases de datos relacionales es uno de esos temas que, por un lado es sumamente importante y por el otro suena algo esotérico. Vamos a tratar de entender las formas normales (FN) de una manera simple para que puedas aplicarlas en tus proyectos profesionales.
+
+### Primera Forma Normal (1FN)
+Esta FN nos ayuda a eliminar los valores repetidos y no atómicos dentro de una base de datos.<br>
+
+Formalmente, una tabla está en primera forma normal si:<br>
+
+* ***Todos los atributos son atómicos.***Un atributo es atómico si los elementos del dominio son simples e indivisibles.
+* ***No debe existir variación en el número de columnas.***
+* ***Los campos no clave deben identificarse por la clave (dependencia funcional).***
+* ***Debe existir una independencia del orden tanto de las filas como de las columnas; es decir, si los datos cambian de orden no deben cambiar sus significados.***
+
+Se traduce básicamente a que si tenemos campos compuestos como por ejemplo “nombre_completo” que en realidad contiene varios datos distintos, en este caso podría ser “nombre”, “apellido_paterno”, “apellido_materno”, etc.<br>
+
+También debemos asegurarnos que las columnas son las mismas para todos los registros, que no haya registros con columnas de más o de menos.<br>
+
+Todos los campos que no se consideran clave deben depender de manera única por el o los campos que si son clave.<br>
+
+Los campos deben ser tales que si reordenamos los registros o reordenamos las columnas, cada dato no pierda el significado.<br>
+
+### Segunda Forma Normal (2FN)
+
+Esta FN nos ayuda a diferenciar los datos en diversas entidades.<br>
+
+Formalmente, una tabla está en segunda forma normal si:<br>
+
+* ***Está en 1FN***
+* ***Sí los atributos que no forman parte de ninguna clave dependen de forma completa de la clave principal. Es decir, que no existen dependencias parciales.***
+* ***Todos los atributos que no son clave principal deben depender únicamente de la clave principal.***
+
+Lo anterior quiere decir que sí tenemos datos que pertenecen a diversas entidades, cada entidad debe tener un campo clave separado. Por ejemplo:<br>
+
+ <img src="./asetts/tabla_alumnos2019-04-30 a la(s) 17.webp" alt="">
+
+
+ En la tabla anterior tenemos por lo menos dos entidades que debemos separar para que cada uno dependa de manera única de su campo llave o ID. En este caso las entidades son alumnos por un lado y materias por el otro. En el ejemplo anterior, quedaría de la siguiente manera:
+
+ <img src="./asetts/separando_tabla_alumnos.webp" alt="">
+
+## Tercera Forma Normal (3FN)
+
+Esta FN nos ayuda a separar conceptualmente las entidades que no son dependientes.<br>
+
+Formalmente, una tabla está en tercera forma normal si:<br>
+
+* ***Se encuentra en 2FN***
+* ***No existe ninguna dependencia funcional transitiva en los atributos que no son clave***
+
+Esta FN se traduce en que aquellos datos que no pertenecen a la entidad deben tener una independencia de las demás y debe tener un campo clave propio. Continuando con el ejemplo anterior, al aplicar la 3FN separamos la tabla alumnos ya que contiene datos de los cursos en ella quedando de la siguiente manera.
+
+<img src="./asetts/alumnos_cursos.webp" alt="">
+
+<img src="./asetts/tabla-materias.webp" alt="">
+
+## Cuarta Forma Normal (4FN)
+Esta FN nos trata de atomizar los datos multivaluados de manera que no tengamos datos repetidos entre rows.<br>
+
+Formalmente, una tabla está en cuarta forma normal si:<br>
+
+* ***Se encuentra en 3FN***
+* ***Los campos multivaluados se identifican por una clave única***
+
+Esta FN trata de eliminar registros duplicados en una entidad, es decir que cada registro tenga un contenido único y de necesitar repetir la data en los resultados se realiza a través de claves foráneas.<br>
+
+Aplicado al ejemplo anterior la tabla materia se independiza y se relaciona con el alumno a través de una tabla transitiva o pivote, de tal manera que si cambiamos el nombre de la materia solamente hay que cambiarla una vez y se propagara a cualquier referencia que haya de ella.<br>
+
+<img src="./asetts/materiasporalumnos.webp" alt="">
+
+De esta manera, aunque parezca que la información se multiplicó, en realidad la descompusimos o normalizamos de manera que a un sistema le sea fácil de reconocer y mantener la consistencia de los datos.<br>
+
+Algunos autores precisan una 5FN que hace referencia a que después de realizar esta normalización a través de uniones (JOIN) permita regresar a la data original de la cual partió.<br>
+
 
 
 

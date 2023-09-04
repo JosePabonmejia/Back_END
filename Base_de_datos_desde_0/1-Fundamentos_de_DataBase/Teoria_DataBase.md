@@ -265,7 +265,104 @@ De esta manera, aunque parezca que la información se multiplicó, en realidad l
 Algunos autores precisan una 5FN que hace referencia a que después de realizar esta normalización a través de uniones (JOIN) permita regresar a la data original de la cual partió.<br>
 
 
+## RDB (relational database)
+
+## RDBMS (Relational DataBase Magement System) Sistema Manejador de Bases de datos relacionales.
+
+La diferencia entre ambos es que las BBDD son un conjunto de datos pertenecientes ( o al menos en teoría) a un mismo tipo de contexto, que guarda los datos de forma persistente para un posterior uso, y el Sistema de gestión de BBDD o sistema manejador, es el que nos permite acceder a ella, es un software, herramienta que sirve de conexión entre las BBDD y el usuario (nos presenta una interfaz para poder gestionarla, manejarla).
+
+### RDBMS (ejemplo)
+
+* MySQL
+* PostgreSQL
+* Etc
+Todas toman un lenguaje base, pero cada uno lo apropia, imponiéndole diferentes reglas y características.
+
+
+## Que es SQL?
+
+SQL es un lenguaje de acceso a bases de datos que explota la flexibilidad y potencia de los sistemas relacionales y permite así gran variedad de operaciones.<br>
+
+* SQL es un estándar aceptado por ANSI (Instituto Nacional Estadounidense de Estándares)
+* PL/SQL es un lenguaje de programación de la base de datos de Oracle, el nombre viene de Procedural Language/Structured Query Language
+* T-SQL es un lenguaje de programación de la base de datos de Microsoft SQL Server y el nombre viene de TRANSACT-SQL
+
+
+## DDL create
+
+SQL tiene dos grandes sublenguajes:<br>
+### DDL o Data Definition Language que nos ayuda a crear la estructura de una base de datos. Existen 3 grandes comandos:
+
+* ***Create:*** Nos ayuda a crear bases de datos, tablas, vistas, índices, etc.
+* ***Alter:*** Ayuda a alterar o modificar entidades.
+* ***Drop:*** Nos ayuda a borrar. Hay que tener cuidado al utilizarlo.
+
+### 3 objetos que manipularemos con el lenguaje DDL:
+
+* Database o bases de datos
+* Table o tablas. Son la traducción a SQL de las entidades
+* View o vistas: Se ofrece la proyección de los datos de la base de datos de forma entendible.
 
 
 
+        DDL :
 
+        CREATE DATABASE nonbre_database; // Crea la base de datos 
+        USE DATABASE nonbre_database; // Usa la base de datos que acabamos de crear
+
+        CREATE TABLE people (
+            person_id int,
+            last_name varchar(255),
+            first_name varchar(255),
+            address varchar(255),
+            city varchar(255)
+        );
+
+        CREATE TABLE `blog_post`.`people` (
+        `id_person` INT NOT NULL AUTO_INCREMENT,
+        `last_name` VARCHAR(255) NULL,
+        `first_name` VARCHAR(255) NULL,
+        `address` VARCHAR(255) NULL,
+        `city` VARCHAR(255) NULL,
+        PRIMARY KEY (`id_person`));
+
+
+        -- Inserta tu sentencia aqui
+        CREATE TABLE IF NOT EXISTS people (
+        person_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+        last_name VARCHAR(255) NULL,
+        first_name VARCHAR(255) NULL,
+        address VARCHAR(255) NULL,
+        city VARCHAR(255) NULL
+        );
+        //Insertar datos en las tablas 
+                                                             //Campos
+        INSERT INTO `DataBase`.`people` (`person_id`, `last_name`, `first_name`, `address`, `city`) 
+
+        VALUES  ('1', 'Vásquez', 'Israel', 'Calle Famosa Num 1', 'México'),
+	            ('2', 'Hernández', 'Mónica', 'Reforma 222', 'México'),
+	            ('3', 'Alanis', 'Edgar', 'Central 1', 'Monterrey');
+
+        //Este codigo si funciona 
+        INSERT INTO people (last_name, first_name, address, city) 
+
+        VALUES ("Vásquez", "Israel", "Calle Famosa Num 1", "México"),
+		       ("Hernández", "Mónica", "Reforma 222", "México"),
+               ("Alanís", "Edgar", "Central 1", "Monterrey");
+
+
+         Como crear VIEWS? 
+
+         USE `blog_post`; //Usar esta base de datos 
+            CREATE OR REPLACE VIEW `blog_people` AS //Crear o remplazar una vista blog_people 
+            SELECT*FROM blog_post.people; //Selecciona de la base de datos blog_post la tabla people 
+
+        ALTER TABLE people ADD COLUMN date_of_birth DATETIME NULL AFTER city; 
+        SELECT * FROM people;
+        DESCRIBE people;
+        ALTER TABLE people DROP COLUMN date_of_birth; 
+        DESCRIBE people;
+        SELECT * FROM people;
+
+
+        

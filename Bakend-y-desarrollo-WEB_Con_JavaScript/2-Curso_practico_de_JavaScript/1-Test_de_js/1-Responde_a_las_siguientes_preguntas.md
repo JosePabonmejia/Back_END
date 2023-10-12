@@ -204,21 +204,17 @@ while (i >= 2) {
 }
 Escribe un código en JavaScript que le pregunte a los usuarios cuánto es 2 + 2. Si responden bien, mostramos un mensaje de felicitaciones, pero si responden mal, volvemos a empezar.
 💡 Pista: puedes usar la función prompt de JavaScript.
-//Basic Math Quiz
-let num = 10;
-let num2 = 10;
-const result = num + num2;
-let questions = {
-  q1: `Cuanto es ${num} + ${num2}`
-}
-functionQuizzer() {
-  let userInput = prompt(questions.q1);
-  if (userInput == result) {
-    alert("Felicitaciones, respondiste correctamente el desafio 😎");
-  } else {
-    alert("lamentablemente, tu respuesta es incorrecta, sigue practicando ❌!");
-  }
-}
+
+
+
+    let n = prompt('Cuanto es 2 +2 ');
+    while (n !='4') {
+        let r = prompt('Cuanto es 2 +2 ');
+        n=r;    
+    }
+    alert('Felicidades');
+
+
 Quizzer();
 
 Responde las siguientes preguntas en la sección de comentarios:

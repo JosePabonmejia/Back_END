@@ -1,6 +1,17 @@
-let valor=1;
-typeof valor;
-console.log = typeof valor;
+export function solution(arraySecreto) {
+            if (typeof(solution[0]==='string')) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        solution('jose','ramiro');
+
+
+// let valor=1;
+// typeof valor;
+// console.log = typeof valor;
 
 // Qué es una variable en JavaScript
 // Una variable es la representación de un lugar que reservamos en memoria para guardar un valor. 
@@ -49,3 +60,5 @@ console.log = typeof valor;
 // let pokemonType = ‘grass’
 // o Se puede reasignar: Osea la variable ya inicializada le reasignamos otro valor por ejemplo: inicializamos la variable: let pokemonType = ‘electric’ ahora la reasignamos pokemonType = ‘grass’
 // o Su contexto de es bloque: Solo funciona dentro de un bloque {}, fuera de ello no.
+
+

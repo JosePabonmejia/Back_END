@@ -45,3 +45,17 @@ parr.append(img);//Lo mandamos al html
 
 //Eventos en JS
 //
+
+
+
+var nombre = 'jose';
+var apellido = 'pabon';
+var dinero_a = 200;
+var deudas = 100;
+var dinero = dinero_a - deudas ;
+console.log(`Mi nombre es ${nombre} mi apellido ${apellido} y mi liquido pagable es ${dinero}`); 
+
+function nombreCompleto (nombre,apellido) {
+    console.log(`Mi nombre es ${nombre} y mi apellido es ${apellido}`);
+}
+nombreCompleto('jose','pabon');

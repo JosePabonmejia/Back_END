@@ -1,12 +1,32 @@
-export function solution(arraySecreto) {
-            if (typeof(solution[0]==='string')) {
-                return true;
-            }
-            else {
-                return false;
-            }
-        }
-        solution('jose','ramiro');
+
+//Quiero registrar a un estudiante y que el sistema salude al estudiante
+var articulos = [
+	{ nombre: 'celular', precio: 1000 },
+	{ nombre: 'laptop', precio: 1500 },
+	{ nombre: 'tablet', precio: 2000 },
+	{ nombre: 'teclado', precio: 100 },
+	{ nombre: 'mouse', precio: 70 },
+	{ nombre: 'carro', precio: 30000 },
+];
+
+articulos.forEach(function (articulo) {
+    console.log(articulo.nombre);
+
+});
+
+var nombres_articulos = articulos.find(function (nombres) {
+    return nombres.nombre === 'carro';
+});
+console.log(articulos_nombres);
+
+
+
+
+// (2) [{…}, {…}]
+//   0: {nombre: "⌨️", precio: 100}
+//   1: {nombre: "🖱", precio: 70}
+
+nombreArticulos; // (5) ["📱", "💻", "🖥", "⌨️", "🚗"]
 
 
 // let valor=1;
